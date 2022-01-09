@@ -244,6 +244,9 @@
     <ClCompile Include="..\src\demosaic\xtrans_demosaic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dcraw_unprocessed_raw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\internal\dcraw_defs.h">

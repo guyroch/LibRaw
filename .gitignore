@@ -4,3 +4,7 @@
 
 /.vs
 /Release
+/Debug
+/buildfiles/release-x86_64
+/buildfiles/debug-x86_64
+*.tlog

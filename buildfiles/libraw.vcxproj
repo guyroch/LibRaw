@@ -329,6 +329,7 @@
     <ClCompile Include="..\src\x3f\x3f_parse_process.cpp" />
     <ClCompile Include="..\src\x3f\x3f_utils_patched.cpp" />
     <ClCompile Include="..\src\demosaic\xtrans_demosaic.cpp" />
+    <ClCompile Include="dcraw_unprocessed_raw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\internal\dcraw_defs.h" />

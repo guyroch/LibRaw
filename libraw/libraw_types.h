@@ -220,10 +220,10 @@ typedef unsigned long long UINT64;
     libraw_raw_inset_crop_t raw_inset_crops[2];
   } libraw_image_sizes_t;
 
- typedef struct
+  typedef struct
   {
     short t,l,b,r; // top, left, bottom, right pixel coordinates, (0,0) is top left pixel;
-  } libraw_area_t; 
+  } libraw_area_t;
 
   struct ph1_t
   {
@@ -305,12 +305,12 @@ typedef unsigned long long UINT64;
     int AutoLightingOptimizer;
     int HighlightTonePriority;
 
-   libraw_area_t DefaultCropAbsolute;
-   libraw_area_t RecommendedImageArea;   // contains the image in proper aspect ratio?
-   libraw_area_t LeftOpticalBlack;       // use this, when present, to estimate black levels?
-   libraw_area_t UpperOpticalBlack;
-   libraw_area_t ActiveArea;
-    
+    libraw_area_t DefaultCropAbsolute;
+    libraw_area_t RecommendedImageArea;   // contains the image in proper aspect ratio?
+    libraw_area_t LeftOpticalBlack;       // use this, when present, to estimate black levels?
+    libraw_area_t UpperOpticalBlack;
+    libraw_area_t ActiveArea;
+
     short ISOgain[2]; // AutoISO & BaseISO per ExifTool
   } libraw_canon_makernotes_t;
 
@@ -326,31 +326,31 @@ typedef unsigned long long UINT64;
     int    CoatingCode;
     int    uncropped;
 
-/* CaptureSequenceInitiator is based on the content of the 'model' tag
-  - values like 'Pinhole', 'Flash Sync', '500 Mech.' etc in .3FR 'model' tag
-    come from MAIN MENU > SETTINGS > Camera;
-  - otherwise 'model' contains:
-    1. if CF/CFV/CFH, SU enclosure, can be with SU type if '-' is present
-    2. else if '-' is present, HB + SU type;
-    3. HB;
-*/
+    /* CaptureSequenceInitiator is based on the content of the 'model' tag
+      - values like 'Pinhole', 'Flash Sync', '500 Mech.' etc in .3FR 'model' tag
+        come from MAIN MENU > SETTINGS > Camera;
+      - otherwise 'model' contains:
+        1. if CF/CFV/CFH, SU enclosure, can be with SU type if '-' is present
+        2. else if '-' is present, HB + SU type;
+        3. HB;
+    */
     char CaptureSequenceInitiator[32];
 
-/* SensorUnitConnector, makernotes 0x0015 tag:
- - in .3FR - SU side
- - in .FFF - HB side
-*/
+    /* SensorUnitConnector, makernotes 0x0015 tag:
+     - in .3FR - SU side
+     - in .FFF - HB side
+    */
     char SensorUnitConnector[64];
 
     int format; // 3FR, FFF, Imacon (H3D-39 and maybe others), Hasselblad/Phocus DNG, Adobe DNG
     int nIFD_CM[2]; // number of IFD containing CM
     int RecommendedCrop[2];
 
-/* mnColorMatrix is in makernotes tag 0x002a;
-  not present in .3FR files and Imacon/H3D-39 .FFF files;
-  when present in .FFF and Phocus .DNG files, it is a copy of CM1 from .3FR;
-  available samples contain all '1's in the first 3 elements
-*/
+    /* mnColorMatrix is in makernotes tag 0x002a;
+      not present in .3FR files and Imacon/H3D-39 .FFF files;
+      when present in .FFF and Phocus .DNG files, it is a copy of CM1 from .3FR;
+      available samples contain all '1's in the first 3 elements
+    */
     double mnColorMatrix[4][3];
 
   } libraw_hasselblad_makernotes_t;
@@ -469,18 +469,18 @@ typedef unsigned long long UINT64;
     uchar  FlashGroupOutputAndCompensation[4];
     uchar  FlashColorFilter;
 
-/* NEF compression, comments follow those for ExifTool tag 0x0093:
-	 1: Lossy (type 1)
-	 2: Uncompressed
-	 3: Lossless
-	 4: Lossy (type 2)
-	 5: Striped packed 12-bit
-	 6: Uncompressed (14-bit reduced to 12-bit)
-	 7: Unpacked 12-bit
-	 8: Small raw
-	 9: Packed 12-bit
-	10: Packed 14-bit
-*/
+    /* NEF compression, comments follow those for ExifTool tag 0x0093:
+         1: Lossy (type 1)
+         2: Uncompressed
+         3: Lossless
+         4: Lossy (type 2)
+         5: Striped packed 12-bit
+         6: Uncompressed (14-bit reduced to 12-bit)
+         7: Unpacked 12-bit
+         8: Small raw
+         9: Packed 12-bit
+        10: Packed 14-bit
+    */
     ushort NEFCompression;
 
     int    ExposureMode;
@@ -573,7 +573,7 @@ typedef unsigned long long UINT64;
     uchar    AFPointMode;
     uchar    MultiExposure; /* last bit is not "1" if ME is not used */
     ushort   Quality; /* 4 is raw, 7 is raw w/ pixel shift, 8 is raw w/ dynamic
-                       pixel shift */
+                     pixel shift */
   } libraw_pentax_makernotes_t;
 
   typedef struct
@@ -634,16 +634,16 @@ typedef unsigned long long UINT64;
 
   typedef struct
   {
-/* afdata:
-  0x0010 CameraInfo
-  0x2020 AFPointsUsed
-  0x2022 FocalPlaneAFPointsUsed
-  0x202a Tag202a
-  0x940e AFInfo
-*/
+    /* afdata:
+      0x0010 CameraInfo
+      0x2020 AFPointsUsed
+      0x2022 FocalPlaneAFPointsUsed
+      0x202a Tag202a
+      0x940e AFInfo
+    */
     ushort   CameraType;                      // init in 0xffff
     uchar    Sony0x9400_version; /* 0 if not found/deciphered,
-                                    0xa, 0xb, 0xc following exiftool convention */
+                                 0xa, 0xb, 0xc following exiftool convention */
     uchar    Sony0x9400_ReleaseMode2;
     unsigned Sony0x9400_SequenceImageNumber;
     uchar    Sony0x9400_SequenceLength1;
@@ -693,14 +693,14 @@ typedef unsigned long long UINT64;
     ushort   prd_BayerPattern;  /* 0 -> not valid; 1 -> RGGB; 4 -> GBRG */
 
     ushort   SonyRawFileType; /* init in 0xffff
-                               valid for ARW 2.0 and up (FileFormat >= 3000)
-                               takes precedence over RAWFileType and Quality:
-                               0  for uncompressed 14-bit raw
-                               1  for uncompressed 12-bit raw
-                               2  for compressed raw (lossy)
-                               3  for lossless compressed raw
-                               4  for lossless compressed raw v.2 (ILCE-1)
-                            */
+                             valid for ARW 2.0 and up (FileFormat >= 3000)
+                             takes precedence over RAWFileType and Quality:
+                             0  for uncompressed 14-bit raw
+                             1  for uncompressed 12-bit raw
+                             2  for compressed raw (lossy)
+                             3  for lossless compressed raw
+                             4  for lossless compressed raw v.2 (ILCE-1)
+                          */
     ushort RAWFileType;     /* init in 0xffff
                                takes precedence over Quality
                                0 for compressed raw,
@@ -732,20 +732,20 @@ typedef unsigned long long UINT64;
     unsigned data_maximum;
     unsigned maximum;
 
-// Canon (SpecularWhiteLevel)
-// Kodak (14N, 14nx, SLR/c/n, DCS720X, DCS760C, DCS760M, ProBack, ProBack645, P712, P880, P850)
-// Olympus, except:
-//	C5050Z, C5060WZ, C7070WZ, C8080WZ
-//	SP350, SP500UZ, SP510UZ, SP565UZ
-//	E-10, E-20
-//	E-300, E-330, E-400, E-410, E-420, E-450, E-500, E-510, E-520
-//	E-1, E-3
-//	XZ-1
-// Panasonic
-// Pentax
-// Sony
-// and aliases of the above
-// DNG
+    // Canon (SpecularWhiteLevel)
+    // Kodak (14N, 14nx, SLR/c/n, DCS720X, DCS760C, DCS760M, ProBack, ProBack645, P712, P880, P850) 
+    // Olympus, except:
+    //	C5050Z, C5060WZ, C7070WZ, C8080WZ
+    //	SP350, SP500UZ, SP510UZ, SP565UZ
+    //	E-10, E-20
+    //	E-300, E-330, E-400, E-410, E-420, E-450, E-500, E-510, E-520
+    //	E-1, E-3
+    //	XZ-1
+    // Panasonic
+    // Pentax
+    // Sony
+    // and aliases of the above
+    // DNG
     long linear_max[4];
 
     float fmaximum;
@@ -787,7 +787,7 @@ typedef unsigned long long UINT64;
                       7    Never seen
                       8    "IIQ L16" (IIQ L16EX / IIQ L16)
                       */
-	int ExifColorSpace;
+    int ExifColorSpace;
   } libraw_colordata_t;
 
   typedef struct
@@ -825,11 +825,11 @@ typedef unsigned long long UINT64;
 
   typedef struct
   {
-      unsigned AFInfoData_tag;
-      short    AFInfoData_order;
-      unsigned AFInfoData_version;
-      unsigned AFInfoData_length;
-      uchar   *AFInfoData;
+    unsigned AFInfoData_tag;
+    short    AFInfoData_order;
+    unsigned AFInfoData_version;
+    unsigned AFInfoData_length;
+    uchar   *AFInfoData;
   } libraw_afinfo_item_t;
 
   typedef struct {
@@ -877,6 +877,11 @@ typedef unsigned long long UINT64;
     char *bad_pixels;      /* -P */
     char *dark_frame;      /* -K */
     int output_bps;        /* -4 */
+
+    // backyard start
+    int input_bps;
+    // backyard end
+
     int output_tiff;       /* -T */
     int output_flags;
     int user_flip;         /* -t */
@@ -903,22 +908,22 @@ typedef unsigned long long UINT64;
     int no_interpolation;
   } libraw_output_params_t;
 
-  typedef struct  
+  typedef struct
   {
-      /* Raw speed */
-      int use_rawspeed;
-      /* DNG SDK */
-      int use_dngsdk;
-      unsigned options;
-      unsigned shot_select;  /* -s */
-      unsigned specials;
-      unsigned max_raw_memory_mb;
-      int sony_arw2_posterization_thr;
-      /* Nikon Coolscan */
-      float coolscan_nef_gamma;
-      char p4shot_order[5];
-      /* Custom camera list */
-      char **custom_camera_strings;
+    /* Raw speed */
+    int use_rawspeed;
+    /* DNG SDK */
+    int use_dngsdk;
+    unsigned options;
+    unsigned shot_select;  /* -s */
+    unsigned specials;
+    unsigned max_raw_memory_mb;
+    int sony_arw2_posterization_thr;
+    /* Nikon Coolscan */
+    float coolscan_nef_gamma;
+    char p4shot_order[5];
+    /* Custom camera list */
+    char **custom_camera_strings;
   }libraw_raw_unpack_params_t;
 
   typedef struct
@@ -1043,6 +1048,12 @@ typedef unsigned long long UINT64;
 
   typedef struct
   {
+    // backyard - start
+    ushort(*image_unprocessed);
+    ushort image_unprocessed_width;
+    ushort image_unprocessed_height;
+    // backyard - end
+
     ushort (*image)[4];
     libraw_image_sizes_t sizes;
     libraw_iparams_t idata;
@@ -1089,25 +1100,25 @@ typedef unsigned long long UINT64;
 class libraw_static_table_t
 {
 public:
-    libraw_static_table_t(const int *a, const unsigned s): data(a),_size(s) {}
-    libraw_static_table_t(): data(0),_size(0){}
-    libraw_static_table_t(const libraw_static_table_t& s) : data(s.data), _size(s._size) {}
-    unsigned size() const { return _size; }
-    libraw_static_table_t& operator = (const libraw_static_table_t& s)
-    {
-        _size = s._size;
-        data = s.data;
-        return *this;
-    }
-    int operator [] (unsigned idx) const
-    {
-        if (idx < _size) return data[idx];
-        if(_size>0 && data) return data[0];
-        return 0;
-    }
+  libraw_static_table_t(const int *a, const unsigned s): data(a),_size(s) {}
+  libraw_static_table_t(): data(0),_size(0){}
+  libraw_static_table_t(const libraw_static_table_t& s) : data(s.data), _size(s._size) {}
+  unsigned size() const { return _size; }
+  libraw_static_table_t& operator = (const libraw_static_table_t& s)
+  {
+    _size = s._size;
+    data = s.data;
+    return *this;
+  }
+  int operator [] (unsigned idx) const
+  {
+    if (idx < _size) return data[idx];
+    if(_size>0 && data) return data[0];
+    return 0;
+  }
 private:
-    const int *data;
-    unsigned _size;
+  const int *data;
+  unsigned _size;
 };
 
 #endif

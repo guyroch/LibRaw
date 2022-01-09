@@ -164,6 +164,21 @@ extern "C"
   DllDef void libraw_set_user_mul(libraw_data_t *lr, int index, float val);
   DllDef void libraw_set_output_bps(libraw_data_t *lr, int value);
   DllDef void libraw_set_gamma(libraw_data_t *lr, int index, float value);
+
+  // backyard - begin
+  DllDef int libraw_dcraw_unprocessed_raw(libraw_data_t *lr);
+  DllDef int libraw_dcraw_ppm_tiff_unprocessed_raw_writer(libraw_data_t *lr, const char *filename);
+  DllDef void libraw_setuser_flip(libraw_data_t *lr, int value);
+  DllDef void libraw_set_no_interpolation(libraw_data_t *lr, int value);
+  DllDef void libraw_set_no_auto_scale(libraw_data_t *lr, int value);
+  DllDef void libraw_set_user_qual(libraw_data_t *lr, int value);
+  DllDef void libraw_set_use_auto_wb(libraw_data_t *lr, int value);
+  DllDef void libraw_set_use_camera_wb(libraw_data_t *lr, int value);
+  DllDef void libraw_set_half_size(libraw_data_t *lr, int value);
+  DllDef void libraw_set_use_camera_matrix(libraw_data_t *lr, int value);
+  DllDef void libraw_set_input_bps(libraw_data_t *lr, int value);
+  // backyard - end 
+
   DllDef void libraw_set_no_auto_bright(libraw_data_t *lr, int value);
   DllDef void libraw_set_bright(libraw_data_t *lr, float value);
   DllDef void libraw_set_highlight(libraw_data_t *lr, int value);
@@ -190,6 +205,10 @@ extern "C"
 class DllDef LibRaw
 {
 public:
+  // backyard - begin
+  int is_unprocessed_raw = 0;
+  // backyard - begin
+
   libraw_data_t imgdata;
 
   LibRaw(unsigned int flags = LIBRAW_OPTIONS_NONE);
@@ -269,6 +288,12 @@ public:
   int dcraw_ppm_tiff_writer(const char *filename);
   int dcraw_thumb_writer(const char *fname);
   int dcraw_process(void);
+
+  // backyard - begin
+  int dcraw_unprocessed_raw();
+  int dcraw_ppm_tiff_unprocessed_raw_writer(const char *filename);
+  // backyard - end
+
   /* information calls */
   int is_fuji_rotated()
   {

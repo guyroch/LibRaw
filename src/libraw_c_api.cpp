@@ -231,6 +231,92 @@ extern "C"
     LibRaw *ip = (LibRaw *)lr->parent_class;
     return ip->dcraw_ppm_tiff_writer(filename);
   }
+
+  // backyard - begin
+  int libraw_dcraw_ppm_tiff_unprocessed_raw_writer(libraw_data_t *lr,
+                                                   const char *filename)
+  {
+    if (!lr)
+      return EINVAL;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    return ip->dcraw_ppm_tiff_unprocessed_raw_writer(filename);
+  }
+
+  int libraw_dcraw_unprocessed_raw(libraw_data_t *lr)
+  {
+    if (!lr)
+      return EINVAL;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    return ip->dcraw_unprocessed_raw();
+  }
+
+  DllDef void libraw_set_no_interpolation(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.no_interpolation = value;
+  }
+
+  DllDef void libraw_set_no_auto_scale(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.no_auto_scale = value;
+  }
+
+  DllDef void libraw_set_user_qual(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.user_qual = value;
+  }
+
+  DllDef void libraw_set_use_auto_wb(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.use_auto_wb = value;
+  }
+
+  DllDef void libraw_set_use_camera_wb(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.use_camera_wb = value;
+  }
+
+  DllDef void libraw_set_half_size(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.half_size = value;
+  }
+
+  DllDef void libraw_set_use_camera_matrix(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.use_camera_matrix = value;
+  }
+
+  DllDef void libraw_setuser_flip(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.user_flip = value;
+  }
+
+  // backyard - end
+
+
   int libraw_dcraw_thumb_writer(libraw_data_t *lr, const char *fname)
   {
     if (!lr)
@@ -336,6 +422,16 @@ extern "C"
     LibRaw *ip = (LibRaw *)lr->parent_class;
     ip->imgdata.params.output_bps = value;
   }
+
+  // backyard start
+  DllDef void libraw_set_input_bps(libraw_data_t *lr, int value)
+  {
+    if (!lr)
+      return;
+    LibRaw *ip = (LibRaw *)lr->parent_class;
+    ip->imgdata.params.input_bps = value;
+  }
+  // backyard end
 
   	DllDef void libraw_set_output_tif(libraw_data_t *lr, int value)
   {
